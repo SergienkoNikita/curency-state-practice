@@ -1,0 +1,21 @@
+{
+  "name": "curency-state-practice",
+  "version": "1.0.0",
+  "description": "curency-state-practice",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "app": "node ./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SergienkoNikita/curency-state-practice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SergienkoNikita/curency-state-practice/issues"
+  },
+  "homepage": "https://github.com/SergienkoNikita/curency-state-practice#readme"
+}
