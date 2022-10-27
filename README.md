@@ -8,7 +8,7 @@ curency-state-practice
 
 Дополнение доки ↓
 
-
+ **Для запуска кода используем команду `npm run test`**
 
 
 
