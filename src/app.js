@@ -5,24 +5,32 @@ export const init = () => {
 	const countryCode = getRandCountryCode();
 
 	// Start here
+
+	//let userCountry = 'RU';
+	//const ua = 'UA';
+	//const ru = 'RU';
+	//const kz = 'KZ';
+	//const by = 'BY';
+
 	const cryptos = ['BTC', 'ETH', 'EGLD'];
+	let userCountry = ['UA', 'RU', 'KZ', 'BY'];
 
 	switch (countryCode) {
 		case 'UA':
-			alert('Украина');
+			userCountry = 'Украина';
 			break;
 		case 'RU':
-			alert('Россия');
+			userCountry =  'Россия';
 			break;
 		case 'KZ':
-			alert('Казахстан');
+			userCountry =  'Казахстан';
 			break;
 		case 'BY':
-			alert('Беларусь');
+			userCountry =  'Беларусь';
 			break;
 		default:
-			alert('Страна не верна!');
-			alert('Введите одну из следующих стран: UA, RU, KZ, BY.');
+			userCountry =  'неизсвестной нам страны!';
+
 	}
 	// End here
 
