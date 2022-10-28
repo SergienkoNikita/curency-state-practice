@@ -17,3 +17,28 @@ export const getRandCountryCode = () => {
 			.replace('/\[^A-Z]/g', '')
 			.slice(0, 2)
 }
+
+export const getCryptos = () => {
+	return [
+		'BTC',
+		'ETH',
+		'USDT',
+		'EGLD',
+		'BNB',
+		'MATIC',
+		'USDC',
+		'SHIB',
+		'XRP',
+		'BUSD',
+		'ADA',
+		'DOGE',
+		'SOL',
+		'WBTC',
+		'LTC',
+		'ATOM',
+		'ETC',
+		'ALGO',
+		'BCH',
+		'MANA',
+	];
+};

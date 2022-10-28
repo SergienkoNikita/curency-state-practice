@@ -1,19 +1,16 @@
-import { getRandCountryCode } from "./mocks.js";
+import { getCryptos, getRandCountryCode } from "./mocks.js";
 
 
 export const init = () => {
+	// Код страны
 	const countryCode = getRandCountryCode();
+	//Авторизован ли пользователь
+	const isAuthorize = !!Math.floor(Math.random() * 2);
+	//Все доступные криптовалюты
+	const cryptos = [...getCryptos()];
 
 	// Start here
-
-	//let userCountry = 'RU';
-	//const ua = 'UA';
-	//const ru = 'RU';
-	//const kz = 'KZ';
-	//const by = 'BY';
-
-	const cryptos = ['BTC', 'ETH', 'EGLD'];
-	let userCountry = ['UA', 'RU', 'KZ', 'BY'];
+	let userCountry = 'неизсвестной нам страны!';
 
 	switch (countryCode) {
 		case 'UA':
@@ -28,13 +25,16 @@ export const init = () => {
 		case 'BY':
 			userCountry =  'Беларусь';
 			break;
-		default:
-			userCountry =  'неизсвестной нам страны!';
-
 	}
+
 	// End here
 
-
+	// Говорим пользователю из какой он страны
 	console.log(`Привет! Мы определили что ты из ${userCountry}`);
-	console.log(`Ты можешь посмотреть курсы ${cryptos} к EUR и USD`);
+	// Говорим 3 самые популярные криптовалюты
+	console.log(`Ты можешь посмотреть курсы ${previewCryptos} к EUR и USD`);
+	// Показываем чуть еще 5 криптовалют
+	console.log(`Так-же доступны:  ${moreCryptos}`);
+	// Отображаем пользователю все доступные для него криптовалюты
+	console.log(`Все доступные:  ${cryptos}`);
 }
