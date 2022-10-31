@@ -4,31 +4,54 @@ import { getCryptos, getRandCountryCode } from "./mocks.js";
 export const init = () => {
 	// Код страны
 	const countryCode = getRandCountryCode();
-	//Авторизован ли пользователь
+	// Авторизован ли пользователь
 	const isAuthorize = !!Math.floor(Math.random() * 2);
-	//Все доступные криптовалюты
+	// Все доступные криптовалюты
 	const cryptos = [...getCryptos()];
 
-	// Start here
 	let userCountry = 'неизсвестной нам страны!';
 
 
 	if (countryCode === 'UA') {
 		userCountry = 'Украина';
-	} else if (countryCode === 'RU') {
+	}
+
+	if (countryCode === 'RU') {
 		userCountry = 'Россия';
-	} else if (countryCode === 'KZ') {
+	}
+
+	if (countryCode === 'KZ') {
 		userCountry = 'Казахстан';
-	} else if (countryCode === 'BY') {
+	}
+
+	if (countryCode === 'BY') {
 		userCountry = 'Беларусь';
 	}
 
-	if (isAuthorize === false) {
+	if (!isAuthorize) {
 		cryptos.splice(0,cryptos.length / 2)
 	}
 
 	let previewCryptos = cryptos.slice(0, 3);
 	let moreCryptos = cryptos.slice(3, 8);
+
+
+	// Start here
+
+	const getRandomNum = () => Math.floor(Math.random() * 100) // Рандомное число от 0 до 100
+
+	const randString = Math.random().toString(2)
+
+	// Переписать на while
+
+	// for (let num = 0; num < 20; num += 1) {
+	// 	if (!num % 2) {
+	// 		console.log(`${num} четное`)
+	// 	} else {
+	// 		console.log(`${num} не четное`)
+	// 	}
+	// }
+
 	// End here
 
 	// Говорим пользователю из какой он страны
