@@ -11,8 +11,7 @@ export const init = () => {
 
 	// Start here
 	let userCountry = 'неизсвестной нам страны!';
-	let previewCryptos = cryptos.slice(0, 3);
-	let moreCryptos = cryptos.slice(3, 8);
+
 
 	if (countryCode === 'UA') {
 		userCountry = 'Украина';
@@ -25,8 +24,11 @@ export const init = () => {
 	}
 
 	if (isAuthorize === false) {
-		cryptos === cryptos.splice(0, 9)
+		cryptos.splice(0,cryptos.length / 2)
 	}
+
+	let previewCryptos = cryptos.slice(0, 3);
+	let moreCryptos = cryptos.slice(3, 8);
 	// End here
 
 	// Говорим пользователю из какой он страны
