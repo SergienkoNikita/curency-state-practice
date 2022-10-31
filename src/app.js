@@ -12,21 +12,23 @@ export const init = () => {
 	// Start here
 	let userCountry = 'неизсвестной нам страны!';
 
-	switch (countryCode) {
-		case 'UA':
-			userCountry = 'Украина';
-			break;
-		case 'RU':
-			userCountry =  'Россия';
-			break;
-		case 'KZ':
-			userCountry =  'Казахстан';
-			break;
-		case 'BY':
-			userCountry =  'Беларусь';
-			break;
+
+	if (countryCode === 'UA') {
+		userCountry = 'Украина';
+	} else if (countryCode === 'RU') {
+		userCountry = 'Россия';
+	} else if (countryCode === 'KZ') {
+		userCountry = 'Казахстан';
+	} else if (countryCode === 'BY') {
+		userCountry = 'Беларусь';
 	}
 
+	if (isAuthorize === false) {
+		cryptos.splice(0,cryptos.length / 2)
+	}
+
+	let previewCryptos = cryptos.slice(0, 3);
+	let moreCryptos = cryptos.slice(3, 8);
 	// End here
 
 	// Говорим пользователю из какой он страны
@@ -37,4 +39,5 @@ export const init = () => {
 	console.log(`Так-же доступны:  ${moreCryptos}`);
 	// Отображаем пользователю все доступные для него криптовалюты
 	console.log(`Все доступные:  ${cryptos}`);
-}
+	}
+
