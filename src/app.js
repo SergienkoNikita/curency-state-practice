@@ -55,7 +55,7 @@ export const init = () => {
 	}
 
 	let attempt = 1;
-	while (getRandomNum() != 50) {
+	while (getRandomNum() !== 50) {
 		console.log(attempt);
 		attempt += 1;
 	}
@@ -63,8 +63,7 @@ export const init = () => {
 	let withoutDot	= randString.split('.').join('').split('');
 	let unitSum = 0;
 	for (let count = 0; count < randString.length; count += 1 ) {
-		let a = '1';
-		if (withoutDot[count] == a) {
+		if (withoutDot[count] === '1') {
 			unitSum += 1;
 		}
 	}
