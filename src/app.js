@@ -60,6 +60,17 @@ export const init = () => {
 		attempt += 1;
 	}
 
+	let withoutDot	= randString.split('.').join('').split('');
+	let unitSum = 0;
+	for (let count = 0; count < randString.length; count += 1 ) {
+		let a = '1';
+		if (withoutDot[count] == a) {
+			unitSum += 1;
+		}
+	}
+
+	console.log(`количество единиц = ${unitSum}`);
+
 	// Переписать на while
 
 	// for (let num = 0; num < 20; num += 1) {
