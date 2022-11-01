@@ -42,6 +42,24 @@ export const init = () => {
 
 	const randString = Math.random().toString(2)
 
+	let num = 0;
+
+	while (num < 20) {
+		if (num % 2) {
+		 console.log(`${num} не четное`);
+		} else {
+			num
+			console.log(`${num} четное`);
+		}
+		num += 1;
+	}
+
+	let attempt = 1;
+	while (getRandomNum() != 50) {
+		console.log(attempt);
+		attempt += 1;
+	}
+
 	// Переписать на while
 
 	// for (let num = 0; num < 20; num += 1) {
