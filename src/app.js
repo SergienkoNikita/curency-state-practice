@@ -38,48 +38,6 @@ export const init = () => {
 
 	// Start here
 
-	const getRandomNum = () => Math.floor(Math.random() * 100) // Рандомное число от 0 до 100
-
-	const randString = Math.random().toString(2)
-
-	let num = 0;
-
-	while (num < 20) {
-		if (num % 2) {
-		 console.log(`${num} не четное`);
-		} else {
-			num
-			console.log(`${num} четное`);
-		}
-		num += 1;
-	}
-
-	let attempt = 1;
-	while (getRandomNum() !== 50) {
-		console.log(attempt);
-		attempt += 1;
-	}
-
-	let withoutDot	= randString.split('.').join('').split('');
-	let unitSum = 0;
-	for (let count = 0; count < randString.length; count += 1 ) {
-		if (withoutDot[count] === '1') {
-			unitSum += 1;
-		}
-	}
-
-	console.log(`количество единиц = ${unitSum}`);
-
-	// Переписать на while
-
-	// for (let num = 0; num < 20; num += 1) {
-	// 	if (!num % 2) {
-	// 		console.log(`${num} четное`)
-	// 	} else {
-	// 		console.log(`${num} не четное`)
-	// 	}
-	// }
-
 	// End here
 
 	// Говорим пользователю из какой он страны
