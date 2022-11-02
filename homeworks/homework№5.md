@@ -23,7 +23,7 @@
 >```
 >4) Реализовать функцию, которая возвращает массив массивов, входящим массивом в нее будет массив строк, выходящим должен быть массив массивов 
 > т.е. если передали аргкментом `['cfb', 'kvnr', 'udsn']` то на выходе получим - `[['c','f','b'], ['k','v','n','r'], ['u','d','s','n']]`
-
+>5) Пузырьковая сортировка 
 
 
 **Материалы**
@@ -36,5 +36,7 @@
 [Стрелочные функции](https://learn.javascript.ru/arrow-functions-basics)
 
 [Еще раз - Операторы](https://learn.javascript.ru/logical-operators)
+
+[Rest](https://learn.javascript.ru/destructuring-assignment)
 
 [*Доп. Рекурсия и стек](https://learn.javascript.ru/recursion)
