@@ -1,4 +1,5 @@
-import { getCryptos, getRandCountryCode } from "./mocks.js";
+import {getCryptos, getRandCountryCode} from "./mocks.js";
+
 function getCountryName (arg) {
 	if (arg === 'UA') {
 		return 'Украина';
@@ -14,15 +15,14 @@ function getCountryName (arg) {
 	}
 	return 'неизсвестной нам страны'
 }
+
 // Задача 2
 function getCryptosPreview (arg) {
-	let previewCryptos = arg.slice(0, 3);
-	return previewCryptos;
+	return arg.slice(0, 3);
 }
 
 function getMoreCryptos (arg) {
-	let moreCryptos = arg.slice(3, 8);
-	return moreCryptos;
+	return arg.slice(3, 8);
 }
 
 
@@ -37,12 +37,6 @@ export const init = () => {
 	if (!isAuthorize) {
 		cryptos.splice(0,cryptos.length / 2)
 	}
-
-	/*
-        let previewCryptos = cryptos.slice(0, 3);
-        let moreCryptos = cryptos.slice(3, 8);
-    */
-
 	// Start here
 
 	//задача 2
@@ -50,38 +44,16 @@ export const init = () => {
 	let moreCryptos = getMoreCryptos(cryptos);
 
 
-	/* задача 3
-
-	function getCalcRemainder (num) {
-		let remind = (num % 2 );
-		return remind;
-	}
-
-	console.log(getCalcRemainder(12));
-
-	простой вариант, далее по более*/
-
-
-	function getCalcRemainderAnother (num, divisor) {
-		let remind = (num % divisor || num % 2);
-		return remind;
-	}
-
-	console.log(getCalcRemainderAnother(51, 3));
-
 	const arrayArray = ['cfb', 'kvnr', 'udsn'];
 	function getArrayOfArrays (argArray) {
 		const newArray = [];
 		for ( let i = 0; i < argArray.length; i += 1) {
-			let tempArray = [];
-			tempArray.push(argArray[i].split(''));
-			newArray.push(tempArray);
-
+			newArray.push(argArray[i].split(''));
 		}
 		return newArray;
 	}
-	console.log(getArrayOfArrays(arrayArray));
 
+	console.log(getArrayOfArrays(arrayArray));
 
 	let userCountry = getCountryName(countryCode);
 	// End here
