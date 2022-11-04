@@ -1,4 +1,29 @@
-import { getCryptos, getRandCountryCode } from "./mocks.js";
+import {getCryptos, getRandCountryCode} from "./mocks.js";
+
+function getCountryName (arg) {
+	if (arg === 'UA') {
+		return 'Украина';
+	}
+	if (arg === 'RU') {
+		return 'Россия';
+	}
+	if (arg === 'KZ') {
+		return 'Казахстан';
+	}
+	if (arg === 'BY') {
+		return 'Беларусь';
+	}
+	return 'неизсвестной нам страны'
+}
+
+// Задача 2
+function getCryptosPreview (arg) {
+	return arg.slice(0, 3);
+}
+
+function getMoreCryptos (arg) {
+	return arg.slice(3, 8);
+}
 
 
 export const init = () => {
@@ -9,35 +34,28 @@ export const init = () => {
 	// Все доступные криптовалюты
 	const cryptos = [...getCryptos()];
 
-	let userCountry = 'неизсвестной нам страны!';
-
-
-	if (countryCode === 'UA') {
-		userCountry = 'Украина';
-	}
-
-	if (countryCode === 'RU') {
-		userCountry = 'Россия';
-	}
-
-	if (countryCode === 'KZ') {
-		userCountry = 'Казахстан';
-	}
-
-	if (countryCode === 'BY') {
-		userCountry = 'Беларусь';
-	}
-
 	if (!isAuthorize) {
 		cryptos.splice(0,cryptos.length / 2)
 	}
-
-	let previewCryptos = cryptos.slice(0, 3);
-	let moreCryptos = cryptos.slice(3, 8);
-
-
 	// Start here
 
+	//задача 2
+	let previewCryptos = getCryptosPreview(cryptos);
+	let moreCryptos = getMoreCryptos(cryptos);
+
+
+	const arrayArray = ['cfb', 'kvnr', 'udsn'];
+	function getArrayOfArrays (argArray) {
+		const newArray = [];
+		for ( let i = 0; i < argArray.length; i += 1) {
+			newArray.push(argArray[i].split(''));
+		}
+		return newArray;
+	}
+
+	console.log(getArrayOfArrays(arrayArray));
+
+	let userCountry = getCountryName(countryCode);
 	// End here
 
 	// Говорим пользователю из какой он страны
