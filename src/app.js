@@ -26,6 +26,21 @@ function getMoreCryptos (arg) {
 }
 
 
+/**
+ * @param targetObj{Object} целевой (в который клонируем)
+ * @param titleObj{Object} - эталонный из которого клонируем
+ * @returns {Object} - Возвращает целевой объект
+ */
+function objClone(targetObj = {}, titleObj) {
+	for (let key in titleObj) {
+		targetObj[key] = titleObj[key];
+	}
+
+	return targetObj;
+}
+
+
+
 export const init = () => {
 	// Код страны
 	const countryCode = getRandCountryCode();
@@ -37,25 +52,16 @@ export const init = () => {
 	if (!isAuthorize) {
 		cryptos.splice(0,cryptos.length / 2)
 	}
-	// Start here
 
-	//задача 2
 	let previewCryptos = getCryptosPreview(cryptos);
 	let moreCryptos = getMoreCryptos(cryptos);
-
-
-	const arrayArray = ['cfb', 'kvnr', 'udsn'];
-	function getArrayOfArrays (argArray) {
-		const newArray = [];
-		for ( let i = 0; i < argArray.length; i += 1) {
-			newArray.push(argArray[i].split(''));
-		}
-		return newArray;
-	}
-
-	console.log(getArrayOfArrays(arrayArray));
-
 	let userCountry = getCountryName(countryCode);
+
+	// Start here
+
+
+
+
 	// End here
 
 	// Говорим пользователю из какой он страны
