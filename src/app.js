@@ -59,8 +59,84 @@ export const init = () => {
 
 	// Start here
 
+	// задача 1
 
+	let num = 34;
+	function getCalcRemainder (num) {
+		function remainderBy (num) {
+			let remeind = (num % 5 );
+			return remeind;
+		}
+		return remainderBy(num)
+	}
 
+	console.log(getCalcRemainder(num));
+
+	// Задача 2
+	const arrayBubble = [3, 2, 5, 6, 4, 1, 8, 9, 7];
+
+	function bubbleSort (arr) {
+		for (let a = 0; a < arr.length; a += 1) {
+			for (let i = 0; i < arr.length; i += 1) {
+				if (arr[i] > arr[i + 1]) {
+					let tempArray = arr[i];
+					arr[i] = arr[i + 1];
+					arr[i + 1] = tempArray;
+				}
+			}
+		}
+		return arr;
+	}
+	console.log(bubbleSort(arrayBubble));
+
+	// задача 3
+	let cloneAddress = {};
+	let address = {
+		district : {
+			good: 'south',
+			normal: 'center',
+			bad: 'north',
+		},
+		street : {
+			'1st' : '1',
+			'2th' : '2',
+			'3th' : '3',
+		}
+	}
+	function objCloneDeep (donor, recipient) {
+		for (let key in donor) {
+			recipient[key] = donor[key];
+		}
+		return recipient;
+	}
+
+	console.log(objCloneDeep(address, cloneAddress));
+
+	// задача 4
+	let base = {
+		name: 'Alexandr',
+		surname: 'Nevski',
+		thirdname: 'Yaroslavovich',
+	}
+
+	let base2 = {
+		name: 'Viktor',
+		thirdname : 'Yakovlevich',
+	}
+	let base3 = {
+		name: 'Alexandr',
+		surname : 'Zverev',
+		fullName: 'Alexandr Zverev Vitalievich',
+	}
+
+	function sayFullName (someObj) {
+		if (someObj.fullName === undefined) {
+			someObj.fullName = `${someObj.name} ${someObj.surname} ${someObj.thirdname}`;
+		}
+	}
+
+	sayFullName(base3);
+	console.log(base3);
 
 	// End here
 
