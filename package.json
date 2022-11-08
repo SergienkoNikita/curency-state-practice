@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/SergienkoNikita/curency-state-practice/issues"
   },
-  "homepage": "https://github.com/SergienkoNikita/curency-state-practice#readme"
+  "homepage": "https://github.com/SergienkoNikita/curency-state-practice#readme",
+  "dependencies": {
+    "readline-sync": "^1.4.10"
+  }
 }
