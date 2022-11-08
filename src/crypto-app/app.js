@@ -1,4 +1,4 @@
-import {getCryptos, getRandCountryCode} from "./mocks.js";
+import { getCryptos, getRandCountryCode } from "../mocks/mocks.js";
 
 function getCountryName (arg) {
 	if (arg === 'UA') {
@@ -41,7 +41,7 @@ function objClone(targetObj = {}, titleObj) {
 
 
 
-export const init = () => {
+export const cryptoApp = () => {
 	// Код страны
 	const countryCode = getRandCountryCode();
 	// Авторизован ли пользователь
