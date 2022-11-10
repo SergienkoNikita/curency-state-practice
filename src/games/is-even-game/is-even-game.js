@@ -1,5 +1,5 @@
 import readlineSync from 'readline-sync'
-import {firstCharToUpperCase, getRandomNum} from "./utils.js";
+import {firstCharToUpperCase, getRandomNum} from "../utils.js";
 import {YES_NO_ANSWER_STRING_VARIANTS} from "./constants.js";
 
 export const isEvenGame = {

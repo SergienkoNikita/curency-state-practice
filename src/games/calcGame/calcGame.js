@@ -1,103 +1,98 @@
 import readlineSync from "readline-sync";
-import {firstCharToUpperCase, getRandomOperator, getRandomNumber} from "./utils.js"
+import {firstCharToUpperCase, getRandomNum} from "../utils.js"
+import {OPERATORS, OPERATION_METHODS} from "./constants.js";
 
 export const isCalcGame = {
+	name: '',
+	defaultName: 'Anonymous',
 
-    name: '',
-    defaultName: 'Anonymous',
+	greetingsMessage: 'Приветствую тебя в игре "Калькулятор"!',
+	askNameMessage: 'Напиши свое имя: ',
+	rules: 'Ты должен правильно решить математическое выражение, ответ напиши в консоль.',
 
-    greetingsMessage: 'Приветствую тебя в игре "Калькулятор"!',
-    askNameMessage: 'Напиши свое имя.',
-    rules: 'Ты должен правильно решить математическое выражение, ответ напиши в консоль.',
+	wasUnCorrectAnswer: false,
+	correctAnswers: 0,
 
-    firstNum: getRandomNumber(),
-    secondNum: getRandomNumber(),
-    operator: getRandomOperator(),
+	winMessage: (name) => `Поздравляю ${name}, ты победил!`,
+	loseMessage: (name) => `Очень жаль ${name}, ты проиграл. Запусти игру снова, чтобы попробовать еще раз.`,
 
-    winMessage: (name) => `Поздравляю ${name}, ты победил!`,
-    loseMessage: (name) => `Очень жаль ${name}, ты проиграл. Запусти игру снова, чтобы попробовать еще раз.`,
-    /*
-    Приветствовать пользователя
-    Запросить ввод имени пользователя
-    Вывести его имя
-    Вывести правила
-    Запросить рандомное число
-    Запросить рандомный оператор
-    Вывести на экран выражение
-    Запросить ответ пользователя
-    Отобразить ответ пользователя
-    Сравнить его с правильным
-    Выдать сообщение показывающее правильный ответ
-    Вин\луз сообщение
-    */
-    start () {
-        this.greetings();
-        this.initUser();
-        this.sayHello();
-        this.showRules ();
-        this.playGame();
-        this.showResultMassage();
-    },
+	start() {
+		this.greetings();
+		this.initUser();
+		this.sayHello();
+		this.showRules();
+		this.playGame();
+		this.showResultMessage();
+	},
 
-    greetings() {
-        console.log(this.greetingsMessage);
-    },
+	greetings() {
+		console.log(this.greetingsMessage);
+	},
 
-    initUser () {
-        this.name = firstCharToUpperCase(readlineSync.question(this.askNameMessage)) || this.defaultName;
-    },
+	initUser() {
+		this.name = firstCharToUpperCase(readlineSync.question(this.askNameMessage)) || this.defaultName;
+	},
 
-    sayHello() {
-        console.log(`Добро пожаловать ${this.name}`);
-    },
+	sayHello() {
+		console.log(`Добро пожаловать ${this.name}`);
+	},
 
-    showRules() {
-        console.log(this.rules);
-    },
+	showRules() {
+		console.log(this.rules);
+	},
 
-    playGame: function () {
-        const task = this.getTask()
-        console.log(`Выражение: ${task}`);
+	playGame() {
+		while (this.correctAnswers < 3 && !this.wasUnCorrectAnswer) {
+			this.playRound()
+		}
+	},
 
-        const userAnswer = this.getUserAnswer();
-        const taskResult = this.getCorrectAnswer(task);
-        this.getCheckUserAnswerResult(taskResult, userAnswer);
-    },
+	playRound() {
+		const condition = this.getCondition()
+		console.log(`Выражение: ${condition}`);
 
-    getTask () {
-        return this.firstNum + this.operator + this.secondNum;
+		const userAnswer = this.getUserAnswer();
+		const taskResult = this.getCorrectAnswer(condition);
+		const isAnswerCorrect = this.getCheckUserAnswerResult(taskResult, userAnswer);
 
-    },
-    getUserAnswer () {
-        return readlineSync.question('Твой ответ ').trim().toLowerCase();
-    },
 
-     getCorrectAnswer () {
-        let result;
-         if (this.operator === ' + ') {
-             result = this.firstNum + this.secondNum;
-         }
-         if (this.operator === ' * ') {
-             result = this.firstNum * this.secondNum;
-         }
-         if (this.operator === ' - ') {
-             result = this.firstNum - this.secondNum;
-         }
-         return result;
-     },
+		if (!isAnswerCorrect) {
+			console.log(`Твой ответ: ${userAnswer} не верный. Правильный ответ: ${taskResult}`);
+			this.wasUnCorrectAnswer = true;
+		} else {
+			console.log('И это правильный ответ!');
+			this.correctAnswers += 1;
+		}
+	},
 
-    getCheckUserAnswerResult (taskResult, userAnswer) {
-        if (taskResult !== Number(userAnswer)) {
-            console.log(`Твой ответ :${userAnswer} не верный. Правильный ответ: ${taskResult}`);
-        }
-        console.log('И это правильный ответ!')
-    },
+	getCondition() {
+		const firstNum = getRandomNum();
+		const secondNum = getRandomNum();
+		const operator = OPERATORS[getRandomNum(OPERATORS.length)];
 
-    showResultMassage() {
-            if(this.answerCheck) {
-                console.log(this.loseMessage(this.name));
-            }
-        console.log(this.winMessage(this.name));
-    },
+		return `${firstNum} ${operator} ${secondNum}`;
+	},
 
+	getUserAnswer() {
+		return readlineSync.question('Твой ответ ').trim().toLowerCase();
+	},
+
+	getCorrectAnswer(condition) {
+		const [firstNum, operator, secondNum] = condition.split(' ')
+
+		return OPERATION_METHODS[operator](Number(firstNum), Number(secondNum));
+	},
+
+	getCheckUserAnswerResult(taskResult, userAnswer) {
+		return taskResult === Number(userAnswer)
+	},
+
+	showResultMessage() {
+		if (this.wasUnCorrectAnswer) {
+			console.log(this.loseMessage(this.name));
+			return;
+		}
+		// если wasUnCorrectAnswer получает значение true, консоль выводит loseMessage, в противном случае консоль выведет winMessage
+		console.log(this.winMessage(this.name));
+	}
 }
