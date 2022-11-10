@@ -16,6 +16,13 @@ export const isEvenGame = {
 	wasUnCorrectAnswer: false,
 	correctAnswers: 0,
 
+	//Start - 1
+	//greetings - 2
+	//initUser - 3
+	//sayHello - 4
+	//showRules - 5
+	//playGame - 6 ( внутри в цикле выполняется метод getCondition/getUserAnswer/getCheckUserAnswerResult)
+	//showResultMessage - 7
 
 	start() {
 		this.greetings();
