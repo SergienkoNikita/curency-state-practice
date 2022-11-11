@@ -4,17 +4,17 @@ import {YES_NO_ANSWER_STRING_VARIANTS} from "./constants.js";
 
 export const isEvenGame = {
 	name: '',
-
-	greetingsMessage: 'Добро пожаловать в игру "Проверка на четное"',
-	askNameMessage: 'Как тебя зовут? ',
 	defaultName: 'Anonymous',
+
+	askNameMessage: 'Как тебя зовут? ',
+
 	globalRules: 'Три верных ответа подряд - игра выиграна, один не верный - проиграна.',
-	rules: 'Ответь "Да" если число четное и "Нет" если не четное',
-	winMessage: (name) =>  `Ура ${name}, поздравляю, ты победил`,
-	loseMessage: (name) =>  `Очень жаль ${name}, ты проиграл. Запусти игру снова, чтобы попробовать еще раз`,
 
 	wasUnCorrectAnswer: false,
 	correctAnswers: 0,
+
+	winMessage: (name) =>  `Ура ${name}, поздравляю, ты победил`,
+	loseMessage: (name) =>  `Очень жаль ${name}, ты проиграл. Запусти игру снова, чтобы попробовать еще раз`,
 
 	//Start - 1
 	//greetings - 2
@@ -64,6 +64,29 @@ export const isEvenGame = {
 			this.playRound()
 		}
 	},
+	// метод возвращает рандомное число в зависимости от аргументов. Аргументы по умолчанию от 0 до 100.
+	// метод прописан, в utils.js там же находится переменная которая содержит в себе значение 100 которое используется
+	// как аргумент
+	getUserAnswer() {
+		return readlineSync.question('Четное? ').trim().toLowerCase();
+	},
+
+	// если проверка проходит, инициируется инструкция if, которая сравнивает ответ юзера с yes, если условие
+	// правдиво, в переменную isCorrect. Соответственно если ответ юзера = "да" возвращается коррект true,
+	//  возвращается и ложится в переменную answerCheck и увеличивает счетчик.
+	//  в противном случае возвращается фолс и wasUnCorrectAnswer меняется на true. Что приводит к завершению цикла в playGame
+	showResultMessage() {
+		if (this.wasUnCorrectAnswer) {
+			console.log(this.loseMessage(this.name));
+			return;
+		}
+		// если wasUnCorrectAnswer получает значение true, консоль выводит loseMessage, в противном случае консоль выведет winMessage
+		console.log(this.winMessage(this.name));
+	},
+
+	// region not-repeat
+	rules: 'Ответь "Да" если число четное и "Нет" если не четное',
+	greetingsMessage: 'Добро пожаловать в игру "Проверка на четное"',
 	// в этом методе инициируется цикл while. Код в теле цикла будет исполняться пока условия равны true. Т.е. пока
 	// correctAnswers < 3 и нет wasUnCorrectAnswer. В случае если появится значение wasUnCorrectAnswer, в условиях
 	// будет хотя бы один false ( в операторе "и" наличие хотя бы одного false значения у аргумента - возвращает false)
@@ -91,12 +114,6 @@ export const isEvenGame = {
 
 	getCondition() {
 		return getRandomNum()
-	},
-	// метод возвращает рандомное число в зависимости от аргументов. Аргументы по умолчанию от 0 до 100.
-	// метод прописан, в utils.js там же находится переменная которая содержит в себе значение 100 которое используется
-	// как аргумент
-	getUserAnswer() {
-		return readlineSync.question('Четное? ').trim().toLowerCase();
 	},
 	// Метод запрашивает ввод данных у пользователя, в ответе убирает пробелы в начале и конце и приводит к нижнему регистру.
 	getCheckUserAnswerResult(condition, userAnswer) {
@@ -126,17 +143,5 @@ export const isEvenGame = {
 	// если значение userAnswer не совпадает с значениями из YES_NO_ANSWER_STRING_VARIANTS, мы возвращаем false
 	// в getCheckUserAnswerResult который передает значения в answerCheck и соответственно в playRound выполняется
 	// else меняя значение  wasUnCorrectAnswer на true, что приводит к появлению в условии false и заверщению цикла.
-
-	// если проверка проходит, инициируется инструкция if, которая сравнивает ответ юзера с yes, если условие
-	// правдиво, в переменную isCorrect. Соответственно если ответ юзера = "да" возвращается коррект true,
-	//  возвращается и ложится в переменную answerCheck и увеличивает счетчик.
-	//  в противном случае возвращается фолс и wasUnCorrectAnswer меняется на true. Что приводит к завершению цикла в playGame
-	showResultMessage() {
-		if (this.wasUnCorrectAnswer) {
-			console.log(this.loseMessage(this.name));
-			return;
-		}
-	// если wasUnCorrectAnswer получает значение true, консоль выводит loseMessage, в противном случае консоль выведет winMessage
-		console.log(this.winMessage(this.name));
-	}
+	// endregion not-repeat
 }

@@ -1,5 +1,6 @@
-import { isCalcGame } from "./calcGame/calcGame.js";
+import {gameController} from './game.js'
+import {isCalcGame} from "./calcGame/calcGame.js";
 
 export function init() {
-	isCalcGame.start();
+	gameController.start(isCalcGame);
 }
