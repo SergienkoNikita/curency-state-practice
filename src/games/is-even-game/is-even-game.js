@@ -22,7 +22,7 @@ export const isEvenGame = {
 		const condition = this.getCondition();
 		console.log(condition);
 		const userAnswer = this.getUserAnswer();
-		const rightAnswer = this.getCheckUserAnswerResult(condition, userAnswer);
+		const rightAnswer = this.getCorrectAnswer(condition);
 
 		return {userAnswer, rightAnswer}
 	},
@@ -30,24 +30,10 @@ export const isEvenGame = {
 	getCondition() {
 		return getRandomNum()
 	},
-	getCheckUserAnswerResult(condition, userAnswer) {
+
+	getCorrectAnswer(condition) {
 		const isEven = !(condition % 2);
 
-		let isPresetUserAnswerInAnswerVariants = Object.values(YES_NO_ANSWER_STRING_VARIANTS).includes(userAnswer);
-
-		if (!isPresetUserAnswerInAnswerVariants) return false;
-
-		let isCorrect;
-
-		if (userAnswer === YES_NO_ANSWER_STRING_VARIANTS.YES) {
-			isCorrect = isEven;
-		}
-
-		if (userAnswer === YES_NO_ANSWER_STRING_VARIANTS.NO) {
-			isCorrect = !isEven;
-		}
-
-		return isCorrect;
+		return isEven ? YES_NO_ANSWER_STRING_VARIANTS.YES : YES_NO_ANSWER_STRING_VARIANTS.NO;
 	},
-
 }

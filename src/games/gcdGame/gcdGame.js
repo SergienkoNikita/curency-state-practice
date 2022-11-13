@@ -17,10 +17,9 @@ export const isGcdGame = {
   playRound() {
     const condition = this.getCondition();
     console.log(condition);
-    let firstNum = condition[0];
-    let secondNum = condition[1];
+    const [firstNum, secondNum] = condition.split(' ')
     const userAnswer = this.getUserAnswer();
-    const rightAnswer = this.getCorrectAnswer(firstNum, secondNum);
+    const rightAnswer = this.getCorrectAnswer(Number(firstNum), Number(secondNum));
     return {userAnswer, rightAnswer};
   },
 
@@ -31,14 +30,13 @@ export const isGcdGame = {
   },
 
   getUserAnswer() {
-    return readlineSync.question('Максимальный делитель : ').trim().toLowerCase();
+    return Number(readlineSync.question('Максимальный делитель: ').trim());
   },
 
   getCorrectAnswer(firstNum, secondNum) {
     if (secondNum > firstNum) return this.getCorrectAnswer(secondNum, firstNum);
     if (secondNum === 0) return firstNum;
     return this.getCorrectAnswer(secondNum, firstNum % secondNum);
-
   },
 }
 

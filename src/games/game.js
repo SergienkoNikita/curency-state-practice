@@ -48,7 +48,7 @@ export const gameController = {
 			console.log('И это правильный ответ!');
 		} else {
 			this.wasUnCorrectAnswer = true
-			console.log(`Твой ответ: ${userAnswer} не верный. Правильный ответ: ${rightAnswer}`);
+			console.log(`Твой ответ: "${userAnswer}" не верный. Правильный ответ: "${rightAnswer}"`);
 		}
 	},
 
