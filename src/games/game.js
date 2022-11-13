@@ -48,7 +48,7 @@ export const gameController = {
 			console.log('И это правильный ответ!');
 		} else {
 			this.wasUnCorrectAnswer = true
-			console.log(`Твой ответ: ${userAnswer} не верный. Правильный ответ: ${rightAnswer}`);
+			console.log(`Твой ответ: "${userAnswer}" не верный. Правильный ответ: "${rightAnswer}"`);
 		}
 	},
 
@@ -58,7 +58,6 @@ export const gameController = {
 			console.log(this.loseMessage(this.name));
 			return;
 		}
-		// если wasUnCorrectAnswer получает значение true, консоль выводит loseMessage, в противном случае консоль выведет winMessage
 		console.log(this.winMessage(this.name));
 	},
 }
