@@ -58,7 +58,6 @@ export const gameController = {
 			console.log(this.loseMessage(this.name));
 			return;
 		}
-		// если wasUnCorrectAnswer получает значение true, консоль выводит loseMessage, в противном случае консоль выведет winMessage
 		console.log(this.winMessage(this.name));
 	},
 }
