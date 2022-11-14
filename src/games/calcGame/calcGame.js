@@ -21,7 +21,7 @@ export const isCalcGame = {
 		const userAnswer = this.getUserAnswer();
 		const taskResult = this.getCorrectAnswer(condition);
 
-		return { userAnswer: Number(userAnswer), rightAnswer: taskResult }
+		return { userAnswer: Number(userAnswer), righAnswer: taskResult }
 	},
 
 	getCondition() {
