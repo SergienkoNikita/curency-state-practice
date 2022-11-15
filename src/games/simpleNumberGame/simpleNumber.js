@@ -49,6 +49,12 @@ export const isSimpleNumberGame = {
     if (getAnswer === true && userAnswer === YES_NO_ANSWER_STRING_VARIANTS.YES) {
        isCorrect = YES_NO_ANSWER_STRING_VARIANTS.YES;
     }
+    if (getAnswer === true && userAnswer === YES_NO_ANSWER_STRING_VARIANTS.NO) {
+      isCorrect = YES_NO_ANSWER_STRING_VARIANTS.YES;
+    }
+    if (getAnswer === false && userAnswer === YES_NO_ANSWER_STRING_VARIANTS.YES) {
+      isCorrect = YES_NO_ANSWER_STRING_VARIANTS.NO;
+    }
     return isCorrect;
     },
 }
