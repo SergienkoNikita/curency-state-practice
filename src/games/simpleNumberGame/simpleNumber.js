@@ -19,9 +19,7 @@ export const isSimpleNumberGame = {
     const condition = this.getCondition()
     console.log(`Число: ${condition}`);
     const userAnswer = this.getUserAnswer();
-    console.log(`Твой ответ: ${userAnswer}`);
-    const getAnswer = this.getAnswer(condition);
-    const rightAnswer = this.getCorrectAnswer(getAnswer, userAnswer);
+    const rightAnswer = this.getCorrectAnswer(condition);
 
     return {userAnswer, rightAnswer}
   },
@@ -34,27 +32,14 @@ export const isSimpleNumberGame = {
     return readlineSync.question('Твой ответ: ').trim().toLowerCase();
   },
 
-  getAnswer(condition) {
-    for (let i = 2; i < condition; i += 1) {
-      if (condition % i === 0) return false;
+  isPrime(num) {
+    for (let i = 2; i < num; i += 1) {
+      if (num % i === 0) return false;
     }
-    return condition > 1;
+    return num > 1;
   },
 
-  getCorrectAnswer(getAnswer, userAnswer) {
-    let isCorrect;
-    if (getAnswer === false && userAnswer === YES_NO_ANSWER_STRING_VARIANTS.NO) {
-       isCorrect = YES_NO_ANSWER_STRING_VARIANTS.NO;
-      }
-    if (getAnswer === true && userAnswer === YES_NO_ANSWER_STRING_VARIANTS.YES) {
-       isCorrect = YES_NO_ANSWER_STRING_VARIANTS.YES;
-    }
-    if (getAnswer === true && userAnswer === YES_NO_ANSWER_STRING_VARIANTS.NO) {
-      isCorrect = YES_NO_ANSWER_STRING_VARIANTS.YES;
-    }
-    if (getAnswer === false && userAnswer === YES_NO_ANSWER_STRING_VARIANTS.YES) {
-      isCorrect = YES_NO_ANSWER_STRING_VARIANTS.NO;
-    }
-    return isCorrect;
-    },
+  getCorrectAnswer(condition) {
+    return this.isPrime(condition) ? YES_NO_ANSWER_STRING_VARIANTS.YES : YES_NO_ANSWER_STRING_VARIANTS.NO;
+  },
 }

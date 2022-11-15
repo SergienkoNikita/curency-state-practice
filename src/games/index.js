@@ -6,5 +6,5 @@ import {isProgressionGame} from "./progressionGame/progression.js";
 import {isSimpleNumberGame} from "./simpleNumberGame/simpleNumber.js";
 
 export function init() {
-	gameController.start(isSimpleNumberGame);
+	gameController.start(isProgressionGame);
 }

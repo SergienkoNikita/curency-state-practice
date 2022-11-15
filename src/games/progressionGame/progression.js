@@ -19,7 +19,6 @@ export const isProgressionGame = {
     const condition = this.getCondition()
     console.log(`Прогрессия: ${condition}`);
     const userAnswer = this.getUserAnswer();
-    console.log(`Твой ответ: ${userAnswer}`);
     const rightAnswer = this.getCorrectAnswer(condition);
 
     return {userAnswer, rightAnswer}
@@ -27,10 +26,10 @@ export const isProgressionGame = {
 
   getCondition() {
     let progressionArray = this.getRandomProgression();
-    const randIndex = getRandomNum(progressionArray.length - 1, 1); //написал так что бы по краям не торчали ".."
+    const randIndex = getRandomNum(progressionArray.length - 2, 1); //написал так что бы по краям не торчали ".."
     progressionArray[randIndex] = '..';
 
-    return progressionArray.join(', ').split(',').join('');
+    return progressionArray.join(' ');
   },
 
   getRandomProgression () {
@@ -38,7 +37,7 @@ export const isProgressionGame = {
   const firstNum = getRandomNum();
   const stage = getRandomNum(10, 2);
 
-  let progressionArray = [ ];
+  let progressionArray = [];
 
   for (let a = 1; a < randomLength; a += 1) {
     let stageProgression = firstNum + stage * a;
@@ -55,12 +54,15 @@ export const isProgressionGame = {
   getCorrectAnswer(condition) {
     let temp = condition.split(' ');
     let correctAnswer;
+
+
     for (let i = 0; i < temp.length; i += 1) {
       if (isNaN(temp[i]) && i > 2)
         correctAnswer = Number(temp[i - 1]) - Number(temp[i - 2]) + Number(temp[i - 1]);
       if (isNaN(temp[i]) && i < 2 )
         correctAnswer = Number(temp[i + 1]) - Number(temp[i + 2]) + Number(temp[i - 1]);
     }
-  return Number(correctAnswer);
+
+    return Number(correctAnswer);
   },
 }
