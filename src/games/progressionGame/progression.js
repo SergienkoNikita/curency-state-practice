@@ -1,5 +1,5 @@
 import readlineSync from "readline-sync";
-import {getRandomNum, getRandomProgression} from "../utils.js";
+import {getRandomNum} from "../utils.js";
 
 
 export const isProgressionGame = {
@@ -17,19 +17,35 @@ export const isProgressionGame = {
 
   playRound() {
     const condition = this.getCondition()
-    console.log(condition);
+    console.log(`Прогрессия: ${condition}`);
     const userAnswer = this.getUserAnswer();
+    console.log(`Твой ответ: ${userAnswer}`);
     const rightAnswer = this.getCorrectAnswer(condition);
-    console.log(rightAnswer);
+
     return {userAnswer, rightAnswer}
   },
 
   getCondition() {
-    let progressionArray = getRandomProgression();
+    let progressionArray = this.getRandomProgression();
     const randIndex = getRandomNum(progressionArray.length - 1, 1); //написал так что бы по краям не торчали ".."
     progressionArray[randIndex] = '..';
 
     return progressionArray.join(', ').split(',').join('');
+  },
+
+  getRandomProgression () {
+  const randomLength = getRandomNum(20, 5);
+  const firstNum = getRandomNum();
+  const stage = getRandomNum(10, 2);
+
+  let progressionArray = [ ];
+
+  for (let a = 1; a < randomLength; a += 1) {
+    let stageProgression = firstNum + stage * a;
+    progressionArray.push(stageProgression);
+  }
+
+  return progressionArray
   },
 
   getUserAnswer() {
