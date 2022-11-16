@@ -2,6 +2,7 @@ import readlineSync from "readline-sync";
 import {getRandomNum} from "../utils.js";
 
 
+
 export const progressionGame = {
 	greetingsMessage: 'Добро пожаловать в игру "Арифметическая Прогрессия" ',
 	rules: 'Вставь на место ".." число соответствующее прогрессии ',
