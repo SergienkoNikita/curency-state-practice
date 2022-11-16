@@ -2,7 +2,7 @@ import readlineSync from "readline-sync";
 import {getRandomNum} from "../utils.js"
 import {OPERATORS, OPERATION_METHODS} from "./constants.js";
 
-export const isCalcGame = {
+export const calcGame = {
 	greetingsMessage: 'Приветствую тебя в игре "Калькулятор"!',
 	rules: 'Ты должен правильно решить математическое выражение, ответ напиши в консоль.',
 

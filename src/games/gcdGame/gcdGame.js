@@ -1,8 +1,7 @@
 import readlineSync from "readline-sync";
 import {getRandomNum} from "../utils.js"
 
-export const isGcdGame = {
-
+export const gcdGame = {
   greetingsMessage: 'Приветствую тебя в игре "Наибольший общий делитель"!',
   rules: 'Ты должен правильно определить наибольшее число на которые делятся два следующих чилса: ',
 

@@ -3,7 +3,6 @@ import {getRandomNum} from "../utils.js";
 import {YES_NO_ANSWER_STRING_VARIANTS} from "../is-even-game/constants.js";
 
 export const isSimpleNumberGame = {
-
   greetingsMessage: 'Добро пожаловать в игру "Простое число" ',
   rules: 'Если число простое - отвечай "да", если нет - отвечай "нет" ',
 
