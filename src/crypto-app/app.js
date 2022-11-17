@@ -1,4 +1,5 @@
-import { getCryptos, getRandCountryCode } from "../mocks/mocks.js";
+import { getRandCountryCode } from "../mocks/mocks.js";
+import {getGryptos} from "./api.js";
 
 function getCountryName (arg) {
 	if (arg === 'UA') {
@@ -41,13 +42,13 @@ function objClone(targetObj = {}, titleObj) {
 
 
 
-export const cryptoApp = () => {
+export async function cryptoApp() {
 	// Код страны
 	const countryCode = getRandCountryCode();
 	// Авторизован ли пользователь
 	const isAuthorize = !!Math.floor(Math.random() * 2);
 	// Все доступные криптовалюты
-	const cryptos = [...getCryptos()];
+	const cryptos = await getGryptos()
 
 	if (!isAuthorize) {
 		cryptos.splice(0,cryptos.length / 2)
@@ -62,15 +63,15 @@ export const cryptoApp = () => {
 
 
 
-	// End here
-
-	// Говорим пользователю из какой он страны
-	console.log(`Привет! Мы определили что ты из ${userCountry}`);
-	// Говорим 3 самые популярные криптовалюты
-	console.log(`Ты можешь посмотреть курсы ${previewCryptos} к EUR и USD`);
-	// Показываем чуть еще 5 криптовалют
-	console.log(`Так-же доступны:  ${moreCryptos}`);
-	// Отображаем пользователю все доступные для него криптовалюты
-	console.log(`Все доступные:  ${cryptos}`);
+	// // End here
+	//
+	// // Говорим пользователю из какой он страны
+	// console.log(`Привет! Мы определили что ты из ${userCountry}`);
+	// // Говорим 3 самые популярные криптовалюты
+	// console.log(`Ты можешь посмотреть курсы ${previewCryptos} к EUR и USD`);
+	// // Показываем чуть еще 5 криптовалют
+	// console.log(`Так-же доступны:  ${moreCryptos}`);
+	// // Отображаем пользователю все доступные для него криптовалюты
+	// console.log(`Все доступные:  ${cryptos}`);
 	}
 

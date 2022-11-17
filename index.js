@@ -1,3 +1,3 @@
-import { init } from './src/games/index.js'
+import {cryptoApp} from "./src/crypto-app/app.js";
 
-init();
+await cryptoApp()
