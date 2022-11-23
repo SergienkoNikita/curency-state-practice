@@ -1,5 +1,6 @@
 import {getGryptos} from "./api.js";
-import {askForRegistration, askUserData} from "./user-module/dialog-with-user.js";
+// import {askForRegistration, askUserData} from "./user-module/dialog-with-user.js";
+import {DialogWithUser} from "./user-module/dialog-with-user.js"
 import {User} from "./user-module/user-model.js";
 import {getUserCountry} from "./location/user-location.js";
 
@@ -9,8 +10,8 @@ export async function cryptoApp() {
 	Object.keys(cryptos).forEach((cryptoKey) => {
 		cryptos[cryptoKey].USD = cryptos[cryptoKey].USD.toFixed(4)
 	})
-	const wantRegister = askForRegistration();
-	const currentUser = wantRegister ? new User(askUserData()) : new User({name: 'Anonymous'});
+	const wantRegister = DialogWithUser.prototype.askForRegistration();
+	const currentUser = wantRegister ? new User(DialogWithUser.prototype.askUserData()) : new User({name: 'Anonymous'});
 	const isAuthorise = currentUser.name !== 'Anonymous';
 	const cryptosNames = Object.keys(cryptos);
 
