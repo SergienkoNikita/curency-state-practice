@@ -14,12 +14,14 @@ function findPosition (arr) {
   let s = 0;
   let w = 0;
   let e = 0;
-  for (let i = 0; i < arr.length; i += 1) {
-    if (arr[i] === 'n') n += 1;
-    if (arr[i] === 's') s += 1;
-    if (arr[i] === 'w') w += 1;
-    if (arr[i] === 'e') e += 1;
-  }
+
+  arr.forEach((i) => {
+    if (i === 'n') n += 1;
+    if (i === 's') s += 1;
+    if (i === 'w') w += 1;
+    if (i === 'e') e += 1;
+  })
+
   if (n !== s && w !== e) return false;
   if (n === s && w === e) return true;
 }
@@ -42,3 +44,5 @@ function whoLike (arr) {
 }
 
 console.log(whoLike(arr3))
+
+
