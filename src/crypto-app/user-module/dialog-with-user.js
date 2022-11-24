@@ -31,21 +31,37 @@ import {YES_NO_ANSWER_STRING_VARIANTS} from "../../games/is-even-game/constants.
 // 	}
 // }
 
-export class DialogWithUser {
+class DialogWithUser {
+	#registerQuestionMessage;
+
+	#wrongAnswerMessage;
+
+	#cancelRegistrationMessage;
 
 	constructor() {
+		this.#registerQuestionMessage = 'Do you want to register?\nAnswer "Yes" or "No". ';
+		this.#wrongAnswerMessage = 'Your answer must be "Yes" or "No" \nTry again!';
+		this.#cancelRegistrationMessage = 'You have canceled your registration.';
 	}
 
-	askForRegistration () {
-		const userAnswer = readlineSync.question('Do you want to register?\nAnswer "Yes" or "No". ').toLowerCase();
+	#validateYesNoAnswer(userAnswer) {
+		const validationResult = Object.values(YES_NO_ANSWER_STRING_VARIANTS).includes(userAnswer)
 
-		if (!Object.values(YES_NO_ANSWER_STRING_VARIANTS).includes(userAnswer)) {
-			console.log('Your answer must be "Yes" or "No" \nTry again!');
-			return this.askForRegistration();
-		}
-		if (userAnswer !== YES_NO_ANSWER_STRING_VARIANTS.YES) console.log('You have canceled your registration.');
+		if (!validationResult) console.log(this.#wrongAnswerMessage)
 
-		return userAnswer === YES_NO_ANSWER_STRING_VARIANTS.YES
+		return validationResult;
+	}
+
+	wantUserRegister() {
+		const userAnswer = readlineSync.question(this.#registerQuestionMessage).toLowerCase();
+
+		if (!this.#validateYesNoAnswer(userAnswer)) this.wantUserRegister();
+
+		const isWant = userAnswer === YES_NO_ANSWER_STRING_VARIANTS.YES;
+
+		if (!isWant) console.log(this.#cancelRegistrationMessage);
+
+		return isWant;
 	}
 
 	askUserData () {
@@ -64,3 +80,5 @@ export class DialogWithUser {
 		}
 	}
 }
+
+export const dialog = new DialogWithUser()

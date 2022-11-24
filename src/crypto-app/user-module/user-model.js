@@ -34,21 +34,4 @@ export class User {
 	}
 }
 
-class AdminUser extends User {
-	mumName;
-	constructor(userData) {
-		super(userData);
-	}
-
-	init({name, email = '', surname = ''}) {
-		super.init({name, email, surname});
-		this.isAdmin = true;
-	}
-}
-
-
-const user = new AdminUser({name: 'Anton'});
-console.log(user)
-
-
 
