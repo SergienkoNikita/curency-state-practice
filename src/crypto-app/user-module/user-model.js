@@ -28,6 +28,16 @@ export class User {
 	set name(value) {
 		this.#name = value.toLowerCase();
 	}
+}
+
+class Client extends User {
+	#name;
+	#surname;
+	email;
+
+	constructor(userData) {
+		super(userData);
+	}
 
 	get fullName () {
 		return `${firstCharToUpperCase(this.#name)} ${firstCharToUpperCase(this.#surname)}`
@@ -44,11 +54,12 @@ class AdminUser extends User {
 		super.init({name, email, surname});
 		this.isAdmin = true;
 	}
+
+	set name(value) {
+		return;
+	}
 }
 
-
 const user = new AdminUser({name: 'Anton'});
+
 console.log(user)
-
-
-
