@@ -28,10 +28,19 @@ export class User {
 	set name(value) {
 		this.#name = value.toLowerCase();
 	}
+}
+
+class Client extends User {
+	#name;
+	#surname;
+	email;
+
+	constructor(userData) {
+		super(userData);
+	}
 
 	get fullName () {
 		return `${firstCharToUpperCase(this.#name)} ${firstCharToUpperCase(this.#surname)}`
 	}
 }
-
 
