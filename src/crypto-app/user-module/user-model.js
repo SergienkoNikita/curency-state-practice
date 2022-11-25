@@ -44,22 +44,3 @@ class Client extends User {
 	}
 }
 
-class AdminUser extends User {
-	mumName;
-	constructor(userData) {
-		super(userData);
-	}
-
-	init({name, email = '', surname = ''}) {
-		super.init({name, email, surname});
-		this.isAdmin = true;
-	}
-
-	set name(value) {
-		return;
-	}
-}
-
-const user = new AdminUser({name: 'Anton'});
-
-console.log(user)
