@@ -16,7 +16,7 @@ function getBinarySum (arg1, arg2) {
 console.log(getBinarySum(5, 9))
 
 //hw 13.3
-const array = [1,2,3,4,5,5,4,3,2,1];
+const array = [1,2,3,4,5,4,5,4,42,5,4,3,2,1];
 
 function getIndexN (arr) { // ну я хуй знаю как её ещё обозвать
   let counter = 0;
