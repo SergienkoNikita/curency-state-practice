@@ -1,6 +1,6 @@
-import readlineSync from "readline-sync";
-import {getRandomNum} from "../utils.js";
-import {YES_NO_ANSWER_STRING_VARIANTS} from "../is-even-game/constants.js";
+import readlineSync from 'readline-sync';
+import { getRandomNum } from '../utils.js';
+import { YES_NO_ANSWER_STRING_VARIANTS } from '../is-even-game/constants.js';
 
 export const isSimpleNumberGame = {
   greetingsMessage: 'Добро пожаловать в игру "Простое число" ',
@@ -15,16 +15,16 @@ export const isSimpleNumberGame = {
   },
 
   playRound() {
-    const condition = this.getCondition()
+    const condition = this.getCondition();
     console.log(`Число: ${condition}`);
     const userAnswer = this.getUserAnswer();
     const rightAnswer = this.getCorrectAnswer(condition);
 
-    return {userAnswer, rightAnswer}
+    return { userAnswer, rightAnswer };
   },
 
   getCondition() {
-    return getRandomNum()
+    return getRandomNum();
   },
 
   getUserAnswer() {
@@ -39,6 +39,8 @@ export const isSimpleNumberGame = {
   },
 
   getCorrectAnswer(condition) {
-    return this.isPrime(condition) ? YES_NO_ANSWER_STRING_VARIANTS.YES : YES_NO_ANSWER_STRING_VARIANTS.NO;
+    return this.isPrime(condition)
+      ? YES_NO_ANSWER_STRING_VARIANTS.YES
+      : YES_NO_ANSWER_STRING_VARIANTS.NO;
   },
-}
+};
