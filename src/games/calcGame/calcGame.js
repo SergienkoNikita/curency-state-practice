@@ -1,44 +1,44 @@
-import readlineSync from "readline-sync";
-import {getRandomNum} from "../utils.js"
-import {OPERATORS, OPERATION_METHODS} from "./constants.js";
+import readlineSync from 'readline-sync';
+import { getRandomNum } from '../utils.js';
+import { OPERATORS, OPERATION_METHODS } from './constants.js';
 
 export const calcGame = {
-	greetingsMessage: 'Приветствую тебя в игре "Калькулятор"!',
-	rules: 'Ты должен правильно решить математическое выражение, ответ напиши в консоль.',
+  greetingsMessage: 'Приветствую тебя в игре "Калькулятор"!',
+  rules: 'Ты должен правильно решить математическое выражение, ответ напиши в консоль.',
 
-	showRules() {
-		console.log(this.rules)
-	},
+  showRules() {
+    console.log(this.rules);
+  },
 
-	greetings() {
-		console.log(this.greetingsMessage);
-	},
+  greetings() {
+    console.log(this.greetingsMessage);
+  },
 
-	playRound() {
-		const condition = this.getCondition()
-		console.log(`Выражение: ${condition}`);
+  playRound() {
+    const condition = this.getCondition();
+    console.log(`Выражение: ${condition}`);
 
-		const userAnswer = this.getUserAnswer();
-		const taskResult = this.getCorrectAnswer(condition);
+    const userAnswer = this.getUserAnswer();
+    const taskResult = this.getCorrectAnswer(condition);
 
-		return { userAnswer: Number(userAnswer), righAnswer: taskResult }
-	},
+    return { userAnswer: Number(userAnswer), righAnswer: taskResult };
+  },
 
-	getCondition() {
-		const firstNum = getRandomNum();
-		const secondNum = getRandomNum();
-		const operator = OPERATORS[getRandomNum(OPERATORS.length)];
+  getCondition() {
+    const firstNum = getRandomNum();
+    const secondNum = getRandomNum();
+    const operator = OPERATORS[getRandomNum(OPERATORS.length)];
 
-		return `${firstNum} ${operator} ${secondNum}`;
-	},
+    return `${firstNum} ${operator} ${secondNum}`;
+  },
 
-	getCorrectAnswer(condition) {
-		const [firstNum, operator, secondNum] = condition.split(' ')
+  getCorrectAnswer(condition) {
+    const [firstNum, operator, secondNum] = condition.split(' ');
 
-		return OPERATION_METHODS[operator](Number(firstNum), Number(secondNum));
-	},
+    return OPERATION_METHODS[operator](Number(firstNum), Number(secondNum));
+  },
 
-	getUserAnswer() {
-		return readlineSync.question('Результат ').trim().toLowerCase();
-	},
-}
+  getUserAnswer() {
+    return readlineSync.question('Результат ').trim().toLowerCase();
+  },
+};
