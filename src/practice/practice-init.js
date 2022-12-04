@@ -1,15 +1,15 @@
 //hw 14.1
-// function printerErrors (str) {
-//   let alphabetIncorrectPath = 'nopqrstvwxyz';
-//   let errors = 0;
-//   str.split('').forEach(el => {
-//    if (alphabetIncorrectPath.includes(el))  errors += 1
-//   })
-//
-//    return `${errors}/${str.length}`
-// }
-//
-// console.log(printerErrors('aaaxbbbbyyhwawiwjjjwwm'));
+/*function printerErrors (str) {
+  let alphabetIncorrectPath = 'nopqrstvwxyz';
+  let errors = 0;
+  str.split('').forEach(el => {
+   if (alphabetIncorrectPath.includes(el))  errors += 1
+  })
+
+   return `${errors}/${str.length}`
+}
+
+console.log(printerErrors('aaaxbbbbyyhwawiwjjjwwm'));*/
 //hw 14.2
 // хотел так numArray.forEach(el => Math.pow(el, el)) но почему-то не посчитало
 /*function toPow (num) {
@@ -26,7 +26,11 @@
 
 console.log(toPow(9119))*/
 //hw 14.3
+function comp (a, b) {
 
+}
+
+console.log(comp([2,3,4,'a','b',2], [1,2,3,4,5,'a','b','c']))
 //hw 14.4
 /*function isElementEqual (str) {
   let tempArr = str.toLowerCase().split('');
@@ -45,3 +49,12 @@ console.log(toPow(9119))*/
 
 console.log(isElementEqual("zpzpzpp"))*/
 //hw 14.5
+/*
+function arrayDiff (arr1, arr2 ) {
+  let arrayDiff;
+  return arrayDiff = arr1.filter(el => !arr2.includes(el))
+
+}
+
+console.log(arrayDiff([1,2,2,2,3],[2]))
+*/
