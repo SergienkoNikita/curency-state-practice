@@ -5,19 +5,26 @@ body {
 #app {
     display: block;
     margin: 10% auto;
-    border: 2px solid white;
-    width: 600px;
-    height: 600px;
-}
-
-.block {
-    width: 30px;
-    height: 30px;
-    float: left;
-    margin: 0;
 }
 
 .color-square {
     background: rgba(5, 0, 64, 0.66);
+}
+
+.snake-field {
+    margin: 0 auto;
+    border: 2px solid wheat;
+    border-collapse: collapse;
+}
+
+.snake-field_tr {
+  height: 30px;
+}
+
+.snake-field_td {
+  width: 30px;
+}
+.snake-field_td__colored {
+    background-color: red;
 }
 
