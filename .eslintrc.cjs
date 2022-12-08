@@ -15,13 +15,12 @@ module.exports = {
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    "plugins": [
-        "@typescript-eslint"
-    ],
     "rules": {
         'import/extensions': 'off',
         'no-console': 'off',
         'import/prefer-default-export': 'off',
         'no-shadow': 'off',
+        'no-mixed-spaces-and-tabs': 0,
+        'no-tabs': 0,
     }
 }

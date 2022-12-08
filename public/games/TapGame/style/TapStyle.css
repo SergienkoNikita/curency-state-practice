@@ -1,7 +1,8 @@
 .keyboard {
-    display: inline-block;
     margin: 0 auto;
     border: 2px solid black;
+    width: calc(100%- 4px);
+    height: 30%;
 }
 
 .row {
