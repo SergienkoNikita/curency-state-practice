@@ -3,7 +3,7 @@ body {
 }
 .keyboard {
     margin: 0 auto;
-    width: 80vw;
+    width: calc(100%- 4px);
     height: 30%;
     border: 2px solid black;
     border-radius: 10px;
