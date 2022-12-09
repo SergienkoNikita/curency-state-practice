@@ -1,57 +1,54 @@
+body {
+    height: 100vh;
+}
 .keyboard {
     margin: 0 auto;
-    border: 2px solid black;
     width: calc(100%- 4px);
     height: 30%;
-}
+    border: 2px solid black;
+    border-radius: 10px;
+    white-space: nowrap
 
-.row {
-    display: inline;
 
 }
 
 .key {
     display: inline-block;
-    width: 80px;
-    height: 80px;
+    width: 6.5%;
+    margin: 1px;
+    height: 75px;
     border: 1px solid white;
+
     text-align: center;
     font-size: 25px;
+
+    border-radius: 10px;
+    box-shadow: inset 4px 3px 7px 0 #053457;
+
+    background-color: #2a9494;
 }
 
 .tab-slash {
-    width: 120px;
-    height: 80px;
-    border: 1px solid white;
+    width: calc(11% - 28px);
 }
 
 .capslock {
-    width: 150px;
-    height: 80px;
-    border: 1px solid white;
+    width: calc(12.5% - 26px);
 }
 
 .shift {
-    width: 200px;
-    height: 80px;
-    border: 1px solid white;
+    width: calc(17.5% - 24px);
 }
 
 .backspace {
-    width: 160px;
-    height: 80px;
-    border: 1px solid white;
+    width: calc(15.5% - 56px);
 }
 
 .enter {
-    width: 170px;
-    height: 80px;
-    border: 1px solid white;
+    width: calc(16% - 26px);
 }
 
 .space {
-    width: 600px;
-    height: 80px;
-    border: 1px solid white;
+    width: calc(74% - 20px);
 }
 
