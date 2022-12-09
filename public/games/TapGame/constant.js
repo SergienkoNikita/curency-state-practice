@@ -206,6 +206,7 @@ export const KEYBOARD_DATA = [
     },
     classes: [
       'key',
+      'tab-slash',
     ],
 
   },
@@ -388,6 +389,7 @@ export const KEYBOARD_DATA = [
     },
     classes: [
       'key',
+      'tab-slash',
     ],
 
   },
@@ -402,6 +404,7 @@ export const KEYBOARD_DATA = [
     },
     classes: [
       'key',
+      'capslock',
     ],
 
   },
@@ -570,6 +573,7 @@ export const KEYBOARD_DATA = [
     },
     classes: [
       'key',
+      'enter',
     ],
 
   },
@@ -584,6 +588,7 @@ export const KEYBOARD_DATA = [
     },
     classes: [
       'key',
+      'shift',
     ],
 
   },
@@ -738,6 +743,7 @@ export const KEYBOARD_DATA = [
     },
     classes: [
       'key',
+      'shift',
     ],
 
   },
@@ -780,6 +786,7 @@ export const KEYBOARD_DATA = [
     },
     classes: [
       'key',
+      'space',
     ],
 
   },
