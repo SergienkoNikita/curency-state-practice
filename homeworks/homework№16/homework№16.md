@@ -45,6 +45,8 @@ const todos = [
 **Материалы**
 
 
+### [Объект Date](https://learn.javascript.ru/datetime)
+
 [Поиск элементов](https://learn.javascript.ru/searching-elements-dom)
 
 [Свойства элементов](https://learn.javascript.ru/basic-dom-node-properties)
