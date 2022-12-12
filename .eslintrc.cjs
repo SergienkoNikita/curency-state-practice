@@ -23,5 +23,6 @@ module.exports = {
         'no-mixed-spaces-and-tabs': 0,
         'no-tabs': 0,
         'no-param-reassign': 0,
+        'no-nested-ternary': 0,
     }
 }

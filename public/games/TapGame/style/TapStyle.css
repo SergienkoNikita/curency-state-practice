@@ -1,31 +1,53 @@
 body {
-    height: 100vh;
+    background-color: #ece9bf;
 }
+
 .keyboard {
-    margin: 0 auto;
     width: calc(100%- 4px);
-    height: 30%;
     border: 2px solid black;
     border-radius: 10px;
-    white-space: nowrap
-
-
+    white-space: nowrap;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
 }
 
 .key {
-    display: inline-block;
-    width: 6.5%;
+    display: flex;
+    min-width: 6.5%;
+    justify-content: center;
+    align-items: center;
     margin: 1px;
     height: 75px;
     border: 1px solid white;
-
-    text-align: center;
     font-size: 25px;
 
     border-radius: 10px;
-    box-shadow: inset 4px 3px 7px 0 #053457;
+    box-shadow: rgb(5 52 87) -11px -7px 7px 0 inset;
 
     background-color: #2a9494;
+}
+
+.key span {
+    margin-bottom: 20px;
+}
+
+.letter {
+    background-color: #0e6464;
+}
+
+.number {
+    background-color: #073333;
+}
+
+.punctuation {
+    background-color: #0e6464;
+}
+
+.system {
+    text-transform: capitalize;
 }
 
 .tab-slash {
@@ -52,3 +74,7 @@ body {
     width: calc(74% - 20px);
 }
 
+
+[data-row] {
+    display: flex;
+}

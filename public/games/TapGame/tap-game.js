@@ -1,8 +1,13 @@
 import { getKeyboard } from './modules/kayboard.js';
 
 export function tapGame() {
-  const keyboard = getKeyboard();
-
   const appBlock = document.getElementById('app');
-  appBlock.append(keyboard);
+
+  function renderKeyboard(lang = 'RU') {
+    if (lang === 'RU') {
+      appBlock.append(getKeyboard());
+    }
+  }
+
+  renderKeyboard();
 }
