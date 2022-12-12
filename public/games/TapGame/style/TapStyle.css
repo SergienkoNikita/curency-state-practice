@@ -1,0 +1,80 @@
+body {
+    background-color: #ece9bf;
+}
+
+.keyboard {
+    width: calc(100%- 4px);
+    border: 2px solid black;
+    border-radius: 10px;
+    white-space: nowrap;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: #fff;
+}
+
+.key {
+    display: flex;
+    min-width: 6.5%;
+    justify-content: center;
+    align-items: center;
+    margin: 1px;
+    height: 75px;
+    border: 1px solid white;
+    font-size: 25px;
+
+    border-radius: 10px;
+    box-shadow: rgb(5 52 87) -11px -7px 7px 0 inset;
+
+    background-color: #2a9494;
+}
+
+.key span {
+    margin-bottom: 20px;
+}
+
+.letter {
+    background-color: #0e6464;
+}
+
+.number {
+    background-color: #073333;
+}
+
+.punctuation {
+    background-color: #0e6464;
+}
+
+.system {
+    text-transform: capitalize;
+}
+
+.tab-slash {
+    width: calc(11% - 28px);
+}
+
+.capslock {
+    width: calc(12.5% - 26px);
+}
+
+.shift {
+    width: calc(17.5% - 24px);
+}
+
+.backspace {
+    width: calc(15.5% - 56px);
+}
+
+.enter {
+    width: calc(16% - 26px);
+}
+
+.space {
+    width: calc(74% - 20px);
+}
+
+
+[data-row] {
+    display: flex;
+}
