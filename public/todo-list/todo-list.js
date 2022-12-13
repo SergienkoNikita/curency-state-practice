@@ -1,43 +1,54 @@
 import { makeMockTodos } from './mocks.js';
 
-window.onload = () => {
+const DEFAULT_LIST_LIMIT = 10;
+
+function onWinReady() {
   const todos = makeMockTodos();
   const app = document.getElementById('app');
-  const div = document.createElement('div');
-  const moreItem = document.createElement('div');
+  const listBlock = document.createElement('div');
+  listBlock.classList.add('todo-list');
 
-  div.className = 'todo-list';
+  const getAddTodoField = () => {
+    const label = document.createElement('label');
+    label.classList.add('new-todo');
+    label.insertAdjacentHTML('afterbegin', `
+      <input class="new-todo-field" type="text" placeholder="Введите новую задачу"/>
+      <button type="submit" class="submit-new-todo">✓</button>
+    `);
 
-  app.append(div);
-  app.append(moreItem);
+    return label;
+  };
 
-  moreItem.insertAdjacentHTML('beforeend', `<div class = "more-items">Загрузить ещё ${todos.length - 10} элементов<div>`);
+  app.append(listBlock);
 
-  // сортировка по дате
-  function sortByField(field) {
-    return (a, b) => (a[field] > b[field] ? 1 : -1);
+  listBlock.insertAdjacentElement('beforebegin', getAddTodoField());
+
+  if (todos.length > DEFAULT_LIST_LIMIT) {
+    const button = document.createElement('div');
+    button.classList.add('more-items');
+    button.innerText = `Загрузить ещё ${todos.length - DEFAULT_LIST_LIMIT} элементов`;
+    listBlock.insertAdjacentElement('afterend', button);
   }
 
-  todos.sort(sortByField('createdAt'));
-  const promo = todos.slice(0, 9); // создал новый массив для промо в 10 строк
+  todos.sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1));
+
+  const promo = todos.slice(0, 9); // создал новый массив для промо в 10 items
   // добавление списка
+
+  const getTodoSample = (todoItem) => `
+      <div class="todo-list-label ${todoItem.performed ? 'checked' : ''}">
+        <label for="${todoItem.id}"></label>
+        <input id="${todoItem.id}" type="checkbox" ${todoItem.performed ? 'checked' : ''}>
+        <p class="todo-list-item-title" >${todoItem.title}</p>
+        <div class="todo-list-item-remove-button">
+            <img src="./todo-list/image/delete.png" alt="trash">
+        </div>
+      </div>
+    `;
+
   promo.forEach((todo) => {
-    if (todo.performed) div.insertAdjacentHTML('beforeend', `<label class="checked"><input type="checkbox" checked><p><s>${todo.title}<s></p><button><img src="./todo-list/image/delete.png" alt=""></button></label>`);
-    if (!todo.performed) div.insertAdjacentHTML('beforeend', `<label><input type="checkbox"><p>${todo.title}</p><button><img src="./todo-list/image/delete.png" alt=""></button></label>`);
+    listBlock.insertAdjacentHTML('beforeend', getTodoSample(todo));
   });
-  // фактически что бы отрисовать только выполненные нужно убрать из условия второй if
-  // что бы убрать не выполненные, нужно убрать первый if
+}
 
-  // Загрузить ещё
-  /* document.dquerySelector('more-items').onclick = function () {
-    document.querySelector('more-items').hidden = true;
-    const remainingItems = todos.slice(10, todos.length);
-    remainingItems.forEach((todo) => {
-      if (todo.performed) div.insertAdjacentHTML('beforeend', `<label class="checked"><input type="checkbox" checked><p><s>${todo.title}<s></p><button><img src="./todo-list/image/delete.png" alt=""></button></label>`);
-      if (!todo.performed) div.insertAdjacentHTML('beforeend', `<label><input type="checkbox"><p>${todo.title}</p><button><img src="./todo-list/image/delete.png" alt=""></button></label>`);
-    });
-  }; */
-  // это не доделал
-
-  console.log(todos);
-};
+window.onload = onWinReady;

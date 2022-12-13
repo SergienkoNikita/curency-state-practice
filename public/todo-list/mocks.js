@@ -24,7 +24,7 @@ export const makeMockTodos = () => {
     createdAt: 1670837353756 + Math.floor(Math.random() * 2000 - 1000),
   });
   const generate = () => {
-    while (items.length < 100) {
+    while (items.length < Math.floor(Math.random() * 70 + 5)) {
       items.push(getItem());
     }
   };
