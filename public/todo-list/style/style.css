@@ -116,6 +116,10 @@ body {
     background-color: #eac9c9;
 }
 
+.submit-new-todo:active {
+    background-color: #e82020;
+}
+
 .new-todo-field:focus {
     outline: none;
     border-top: 1px solid #347272;;
