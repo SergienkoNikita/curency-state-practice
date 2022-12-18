@@ -2,40 +2,56 @@ import { makeMockTodos } from './mocks.js';
 
 const DEFAULT_LIST_LIMIT = 10;
 
-function onWinReady() {
-  const todos = makeMockTodos();
-  const app = document.getElementById('app');
+const FILTER_TYPES = Object.freeze({
+  ALL: 'all',
+  PERFORMED: 'performed',
+  NOT_PERFORMED: 'not-performed',
+});
+
+const FILTER_TYPE_VALUES = Object.freeze({
+  [FILTER_TYPES.ALL]: { label: 'Все', value: FILTER_TYPES.ALL },
+  [FILTER_TYPES.PERFORMED]: { label: 'Выполненные', value: FILTER_TYPES.PERFORMED },
+  [!FILTER_TYPES.NOT_PERFORMED]: { label: 'Не выполненные', value: FILTER_TYPES.NOT_PERFORMED },
+});
+
+const getTodoListElement = () => {
   const listBlock = document.createElement('div');
   listBlock.classList.add('todo-list');
+  return listBlock;
+};
 
-  const getAddTodoField = () => {
-    const label = document.createElement('label');
-    label.classList.add('new-todo');
-    label.insertAdjacentHTML('afterbegin', `
-      <input class="new-todo-field" type="text" placeholder="Введите новую задачу"/>
-      <button type="submit" class="submit-new-todo">✓</button>
-    `);
+const getShowMoreButtonElement = () => {
+  const button = document.createElement('div');
+  button.classList.add('more-items');
+  return button;
+};
 
-    return label;
-  };
+const getAddTodoField = () => {
+  const inputElement = document.createElement('input');
+  inputElement.classList.add('new-todo-field');
+  inputElement.type = 'text';
+  inputElement.placeholder = 'Введите новую задачу';
+  return inputElement;
+};
 
-  app.append(listBlock);
+const getAddTodoBlock = () => {
+  const label = document.createElement('label');
+  label.classList.add('new-todo');
+  return label;
+};
 
-  listBlock.insertAdjacentElement('beforebegin', getAddTodoField());
+const getAddTodoSubmit = () => {
+  const buttonElement = document.createElement('div');
+  buttonElement.classList.add('submit-new-todo');
+  buttonElement.type = 'submit';
+  buttonElement.innerText = '+';
+  return buttonElement;
+};
 
-  if (todos.length > DEFAULT_LIST_LIMIT) {
-    const button = document.createElement('div');
-    button.classList.add('more-items');
-    button.innerText = `Загрузить ещё ${todos.length - DEFAULT_LIST_LIMIT} элементов`;
-    listBlock.insertAdjacentElement('afterend', button);
-  }
-
-  todos.sort((a, b) => (a.createdAt > b.createdAt ? 1 : -1));
-
-  const promo = todos.slice(0, 9);
-
-  const getTodoSample = (todoItem) => `
-      <div class="todo-list-label ${todoItem.performed ? 'checked' : ''}">
+// eslint-disable-next-line func-names
+const getListItemElement = function (todoItem) {
+  return `
+      <div class="todo-list-label ${todoItem.performed ? 'checked' : ''}" data-id="${todoItem.id}">
         <label for="${todoItem.id}"></label>
         <input id="${todoItem.id}" type="checkbox" ${todoItem.performed ? 'checked' : ''}>
         <p class="todo-list-item-title" >${todoItem.title}</p>
@@ -44,84 +60,121 @@ function onWinReady() {
         </div>
       </div>
     `;
+};
 
-  // hw 17.2
-  // const performed = [];
+const renderTodos = (block, todos = []) => {
+  todos.forEach((todo) => {
+    block.insertAdjacentHTML('beforeend', getListItemElement(todo));
+  });
+};
 
-  // для выполненных
-
-  // todos.forEach((todo) => {
-  //   if (todo.performed) performed.push(todo);
-  // });
-
-  // для не выполненных
-
-  // todos.forEach((todo) => {
-  //   if (!todo.performed) performed.push(todo);
-  // });
-  // console.log(performed);
-  // console.log(todos);
-
-  // при нажатии "загрузить ещё" он загружает и выполненные и не выполненные.
-  // в restTodo нужно заменить todos на performed. (79 строка кода)
-  // тогда будут открываться только выполненные\или не выполненные в зависимости от сценария.
-  // кроме того performed нужно перенести на 25 строку кода, т.к. он будет использоваться
-  // в отрисовке количества оставшихся для загрузки элементов списка.
-  // т.к. он не может быть использован прежде чем будет объявлен.
-  // я решил не засирать слишком сильно основной код меняя всё это)
-
-  // в методе заменить промо на перформед
-  promo.forEach((todo) => {
-    listBlock.insertAdjacentHTML('beforeend', getTodoSample(todo));
+const getFilterBlock = () => {
+  const selectElement = document.createElement('select');
+  selectElement.classList.add('todo-list-filter');
+  Object.values(FILTER_TYPE_VALUES).forEach((filterType) => {
+    const optionElement = document.createElement('option');
+    optionElement.value = filterType.value;
+    optionElement.innerText = filterType.label;
+    selectElement.insertAdjacentElement('beforeend', optionElement);
   });
 
-  // hw 17.1
-  const restTodo = todos.slice(10);
+  selectElement.value = FILTER_TYPES.ALL;
+  return selectElement;
+};
 
-  function loadMoreTodo() {
-    document.querySelector('.more-items').remove();
-    restTodo.forEach((todo) => {
-      listBlock.insertAdjacentHTML('beforeend', getTodoSample(todo));
-    });
-  }
+const generateNewTodo = (id, title) => ({
+  id,
+  title,
+  performed: false,
+  createdAt: Date.now(),
+});
 
-  if (document.querySelector('.more-items')) {
-    const loadMore = document.querySelector('.more-items');
-    loadMore.addEventListener('click', loadMoreTodo);
-  }
+function todoList() {
+  const app = document.getElementById('app');
+  const list = getTodoListElement();
+  const showMoreButton = getShowMoreButtonElement();
+  const addTodoField = getAddTodoField();
+  const addTodoSubmit = getAddTodoSubmit();
+  const getTodoBlock = getAddTodoBlock();
+  const allTodos = makeMockTodos();
+  let currentTodos = allTodos;
+  let renderedTodos = [...currentTodos.slice(0, DEFAULT_LIST_LIMIT)];
+  const filter = getFilterBlock();
 
-  // hw 17.3
-  const userInput = [];
+  const addShowMoreButton = () => {
+    if (currentTodos.length > DEFAULT_LIST_LIMIT) {
+      showMoreButton.innerText = `Загрузить еще ${currentTodos.length - DEFAULT_LIST_LIMIT}`;
+      list.insertAdjacentElement('afterend', showMoreButton);
+    }
+  };
+  const renderListStructure = () => {
+    list.append(getTodoBlock);
+    getTodoBlock.append(addTodoField);
+    getTodoBlock.append(addTodoSubmit);
+    app.append(list);
+    getTodoBlock.insertAdjacentElement('afterend', filter);
+  };
 
-  const inputField = document.querySelector('.new-todo-field');
-  const inputButton = document.querySelector('.submit-new-todo');
+  const renderCurrentTodos = () => {
+    if (filter.value === FILTER_TYPES.PERFORMED) {
+      currentTodos = allTodos.filter((todoItem) => todoItem.performed);
+    }
+    if (filter.value === FILTER_TYPES.NOT_PERFORMED) {
+      currentTodos = allTodos.filter((todoItem) => !todoItem.performed);
+    }
+    if (filter.value === FILTER_TYPES.ALL) currentTodos = allTodos;
 
-  // const UserInput = class {
-  //   constructor(id, title, createdAt, performed = false) {
-  //     this.id = '';
-  //
-  //     this.title = '';
-  //
-  //     this.createdAt = '';
-  //
-  //     this.performed = '';
-  //   }
-  // };
+    renderedTodos = [...currentTodos.slice(0, DEFAULT_LIST_LIMIT)];
 
-  function inputValue() {
-    userInput.push({
-      id: Math.floor(Math.random() * 2000),
-      title: inputField.value,
-      createdAt: Date.now(),
-      performed: false,
-    });
-    inputField.value = '';
-  }
+    addShowMoreButton();
+    renderTodos(list, renderedTodos);
+  };
 
-  inputButton.addEventListener('click', inputValue);
+  const generateIdForTodo = () => {
+    const randNum = Math.floor(Math.random() * 2000);
+    if (allTodos.some((todo) => todo.id === randNum)) {
+      return generateIdForTodo();
+    }
 
-  console.log(userInput);
-  console.log(todos);
+    return randNum;
+  };
+
+  showMoreButton.addEventListener('click', () => {
+    const moreItems = currentTodos.slice(
+      renderedTodos.length,
+      renderedTodos.length + DEFAULT_LIST_LIMIT,
+    );
+    renderTodos(list, moreItems);
+    renderedTodos.push(...moreItems);
+
+    if (renderedTodos.length >= currentTodos.length) {
+      showMoreButton.remove();
+      showMoreButton.innerText = '';
+    } else {
+      showMoreButton.innerText = `Загрузить еще ${currentTodos.length - renderedTodos.length}`;
+    }
+  });
+
+  addTodoSubmit.addEventListener('click', () => {
+    if (!addTodoField.value) return;
+
+    const todo = generateNewTodo(generateIdForTodo(), addTodoField.value);
+
+    allTodos.unshift(todo);
+    renderedTodos.unshift(todo);
+
+    getTodoBlock.insertAdjacentHTML('afterend', getListItemElement(todo));
+    addTodoField.value = '';
+  });
+
+  filter.addEventListener('change', () => {
+    document.querySelectorAll('[data-id]').forEach((renderedTodo) => renderedTodo.remove());
+    showMoreButton.remove();
+    renderCurrentTodos();
+  });
+
+  renderListStructure();
+  renderCurrentTodos();
 }
 
-window.onload = onWinReady;
+window.onload = todoList;

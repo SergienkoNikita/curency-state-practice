@@ -7,6 +7,7 @@ export function snakeGame(app = document.getElementById('app')) {
     cells: gameFieldCells,
   } = getGameField();
   app.append(gameFieldElement);
+  console.log(gameFieldElement);
 
   const gameField = [];
 
