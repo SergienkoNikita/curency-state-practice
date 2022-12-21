@@ -44,28 +44,48 @@ const getAddTodoSubmit = () => {
   const buttonElement = document.createElement('div');
   buttonElement.classList.add('submit-new-todo');
   buttonElement.type = 'submit';
-  buttonElement.innerText = '+';
+  buttonElement.innerText = '✔';
   return buttonElement;
 };
 
 // eslint-disable-next-line func-names
 const getListItemElement = function (todoItem) {
-  return `
-      <div class="todo-list-label ${todoItem.performed ? 'checked' : ''}" data-id="${todoItem.id}">
-        <label for="${todoItem.id}"></label>
-        <input id="${todoItem.id}" type="checkbox" ${todoItem.performed ? 'checked' : ''}>
-        <p class="todo-list-item-title" >${todoItem.title}</p>
-        <div class="todo-list-item-remove-button">
-            <img src="./todo-list/image/delete.png" alt="trash">
-        </div>
-      </div>
-    `;
+  const block = document.createElement('div');
+  block.classList.add('todo-list-label');
+  if (todoItem.performed) block.classList.add('checked');
+  block.setAttribute('data-id', todoItem.id);
+  block.insertAdjacentHTML(
+    'afterbegin',
+    `
+    <input id="${todoItem.id}" type="checkbox" ${todoItem.performed ? 'checked' : ''}>
+    <p class="todo-list-item-title">${todoItem.title}</p>
+    <div class="todo-list-item-remove-button">
+    <img src="./todo-list/image/delete.png" alt="trash">
+    </div>`,
+  );
+
+  return block;
 };
 
 const renderTodos = (block, todos = []) => {
   todos.forEach((todo) => {
-    block.insertAdjacentHTML('beforeend', getListItemElement(todo));
+    block.append(getListItemElement(todo));
   });
+  block.querySelectorAll('.todo-list-item-remove-button')
+    .forEach((block) => block
+      .addEventListener('click', () => {
+        block.parentElement.remove();
+      }));
+  block.querySelectorAll('.todo-list-label > input')
+    .forEach((input) => input
+      .addEventListener('change', () => {
+        if (!input.checked) {
+          input.parentElement.classList.remove('checked');
+        }
+        if (input.checked) {
+          input.parentElement.classList.add('checked');
+        }
+      }));
 };
 
 const getFilterBlock = () => {
@@ -107,6 +127,7 @@ function todoList() {
       list.insertAdjacentElement('afterend', showMoreButton);
     }
   };
+
   const renderListStructure = () => {
     list.append(getTodoBlock);
     getTodoBlock.append(addTodoField);
@@ -163,7 +184,7 @@ function todoList() {
     allTodos.unshift(todo);
     renderedTodos.unshift(todo);
 
-    getTodoBlock.insertAdjacentHTML('afterend', getListItemElement(todo));
+    getTodoBlock.append(getListItemElement(todo));
     addTodoField.value = '';
   });
 
