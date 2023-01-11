@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="./style.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width">
+</head>
+<body class="form-wrap">
+<form class="form">
+  <h4 class="form-title">Персональная информация</h4>
+  <p class="form-info"><span>*</span> поля обязательные к заполнению</p>
+  <div class="form-field form-field-name">
+    <input id="name" class="form-input" type="text" name="name" autocomplete="off" required>
+    <label class="form-field-label form-field-label-required" for="name">Имя</label>
+  </div>
+  <div class="form-field form-field-surname">
+    <input id="surname" class="form-input" type="text" name="surname" required>
+    <label class="form-field-label form-field-label-required" for="surname">Фамилия</label>
+  </div>
+  <div class="form-field">
+    <input id="phone" class="form-input" type="text" name="phone" required>
+    <label class="form-field-label form-field-label-required" for="phone">Телефон</label>
+  </div>
+  <div class="form-field">
+    <input id="vkLink" class="form-input" type="text" name="vkLink" required>
+    <label class="form-field-label" for="vkLink">Ссылка ВК</label>
+  </div>
+  <div class="form-field">
+    <input id="email" class="form-input" type="email" name="email" required>
+    <label class="form-field-label form-field-label-required" for="email">Email</label>
+  </div>
+  <div class="form-field">
+    <input id="lastName" class="form-input" type="text" name="lastName" required>
+    <label class="form-field-label" for="lastName">Отчество</label>
+  </div>
+  <button class="form-submit-btn" type="submit">Сохранить</button>
+</form>
+<script src="index.js"></script>
+</body>
+</html>
