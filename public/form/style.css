@@ -1,3 +1,13 @@
+@keyframes ping-error {
+  25% {
+    transform: translateX(-5px);
+  }
+
+  75% {
+    transform: translateX(5px);
+  }
+}
+
 
 .form-wrap {
   background-color: #c1d7fb;
@@ -30,6 +40,7 @@
   font-style: italic;
   margin-left: -15px;
 }
+
 .form-info span {
   font-size: 15px;
   line-height: 2px;
@@ -38,6 +49,7 @@
 
 .form-field {
   width: 100%;
+  position: relative;
 }
 
 .form-input {
@@ -53,7 +65,7 @@
 
 .form-input[name="name"],
 .form-input[name="surname"],
-.form-input[name="lastName"]  {
+.form-input[name="lastName"] {
   text-transform: capitalize;
 }
 
@@ -113,6 +125,21 @@
   margin-left: 3px;
   font-size: 15px;
   line-height: 2px;
+}
+
+.form-field-error {
+  margin: 0;
+  font-size: 12px;
+  position: absolute;
+  color: red;
+  top: calc(100% - 17px);
+  left: 5px;
+  display: none;
+}
+
+.form-field-error.visible {
+  display: inline-block;
+  animation: ping-error .2s 1 ease-out;
 }
 
 @media (min-width: 561px) {
@@ -201,40 +228,48 @@
   .form-field-surname .form-input:valid,
   .form-field-name .form-input:focus,
   .form-field-name .form-input:valid {
-    margin-top: 5px;
+    margin-top: 0;
   }
 }
 
-@media (min-width: 1366px){
+@media (min-width: 1366px) {
 
   .form-field-name,
-  .form-field-surname
-  {
-      order: 1;
+  .form-field-surname {
+    order: 1;
   }
 
-  .form-field-lastName {
-      order: 2;
+  .form-field-last-name {
+    order: 2;
   }
 
   .form-field-email {
-      order: 3;
+    order: 3;
   }
 
-  .form-field-vkLink {
-      grid-column: 1/2;
-      margin-top: 5px;
-      order: 4;
+  .form-field-vk-link {
+    grid-column: 1/2;
+    margin-top: 15px;
+    order: 4;
   }
+
   .form-field-phone {
-     grid-column: 2/3;
-     margin-top: 5px;
-     order: 5;
+    grid-column: 2/3;
+    margin-top: 15px;
+    order: 5;
+  }
+
+  .form-field-phone .form-input:focus,
+  .form-field-phone .form-input:valid,
+  .form-field-vk-link .form-input:focus,
+  .form-field-vk-link .form-input:valid {
+    margin-top: 0;
   }
 
   .form-submit-btn {
-      order: 7;
+    order: 7;
   }
+
   /*/ имя - Фамилия /*/
   /*/     отчество   /*/
   /*/     Email       /*/
@@ -242,8 +277,8 @@
 
 }
 
-@media (min-width: 1600px){
-  .form{
+@media (min-width: 1600px) {
+  .form {
     grid-template-columns: repeat(3, 1fr);
   }
 
@@ -252,24 +287,34 @@
     order: 2;
   }
 
-  .form-field-lastName {
+  .form-field-last-name {
     grid-column: 3/4;
     order: 3;
     margin-top: 5px;
   }
 
-  .form-field-lastName .form-input:focus {
-    margin-top: 5px;
+  .form-field-surname .form-input:valid,
+  .form-field-surname .form-input:focus,
+  .form-field-name .form-input:valid,
+  .form-field-name .form-input:focus,
+  .form-field-last-name .form-input:valid,
+  .form-field-last-name .form-input:focus,
+  .form-field-phone .form-input:valid,
+  .form-field-vk-link .form-input:valid,
+  .form-field-phone .form-input:focus,
+  .form-field-vk-link .form-input:focus {
+    margin-top: -7px;
   }
-  .form-field-lastName .form-input:valid {
+
+
+  .form-field-vk-link {
+    order: 4;
     margin-top: 5px;
   }
 
-  .form-field-vkLink {
-    order: 4;
-  }
   .form-field-phone {
     order: 5;
+    margin-top: 5px;
   }
 
   .form-field-email {
@@ -290,18 +335,20 @@
     font-size: 22px;
     margin-top: -5px;
   }
+
   .form-field-label-required:after {
     font-size: 20px;
   }
 
   .form-submit-btn {
-    /*grid-column: 4/1; */
+    /* grid-column: 4/1; */
   }
 
   .form-input {
     font-size: 25px;
     color: black;
   }
+
   /*/ имя    | Фамилия | отчество /*/
   /*/ ссылка | телефон |          /*/
   /*/ Email            |          /*/
