@@ -206,6 +206,35 @@
 }
 
 @media (min-width: 1366px){
+
+  .form-field-name,
+  .form-field-surname
+  {
+      order: 1;
+  }
+
+  .form-field-lastName {
+      order: 2;
+  }
+
+  .form-field-email {
+      order: 3;
+  }
+
+  .form-field-vkLink {
+      grid-column: 1/2;
+      margin-top: 5px;
+      order: 4;
+  }
+  .form-field-phone {
+     grid-column: 2/3;
+     margin-top: 5px;
+     order: 5;
+  }
+
+  .form-submit-btn {
+      order: 7;
+  }
   /*/ имя - Фамилия /*/
   /*/     отчество   /*/
   /*/     Email       /*/
@@ -214,6 +243,58 @@
 }
 
 @media (min-width: 1600px){
+  .form{
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .form-field-surname {
+    grid-column: 2/3;
+    order: 2;
+  }
+
+  .form-field-lastName {
+    grid-column: 3/4;
+    order: 3;
+    margin-top: 5px;
+  }
+
+  .form-field-vkLink {
+    order: 4;
+  }
+  .form-field-phone {
+    order: 5;
+  }
+
+  .form-field-email {
+    order: 6;
+    margin-top: 5px;
+    /*max-width: calc(50% - 5px);*/
+  }
+
+  .form-title {
+    font-size: 45px;
+  }
+
+  .form-info {
+    font-size: 20px;
+  }
+
+  .form-field-label {
+    font-size: 22px;
+    margin-top: -5px;
+  }
+  .form-field-label-required:after {
+    font-size: 20px;
+  }
+
+  .form-submit-btn {
+    /*grid-column: 4/1; */
+  }
+
+  .form-input {
+    font-size: 25px;
+    color: black;
+  }
   /*/ имя    | Фамилия | отчество /*/
   /*/ ссылка | телефон |          /*/
   /*/ Email            |          /*/
