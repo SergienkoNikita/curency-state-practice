@@ -258,6 +258,13 @@
     margin-top: 5px;
   }
 
+  .form-field-lastName .form-input:focus {
+    margin-top: 5px;
+  }
+  .form-field-lastName .form-input:valid {
+    margin-top: 5px;
+  }
+
   .form-field-vkLink {
     order: 4;
   }
